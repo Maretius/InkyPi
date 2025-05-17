@@ -1,5 +1,5 @@
-import random
 import requests
+import random
 import logging
 from PIL import Image
 from io import BytesIO
@@ -7,7 +7,7 @@ from plugins.base_plugin.base_plugin import BasePlugin
 
 logger = logging.getLogger(__name__)
 
-class Immich(BasePlugin):
+class ImmichAlbum(BasePlugin):
     def generate_image(self, settings, device_config):
         api_url = settings.get("api_url")  # e.g., "http://your-immich-server/api"
         album_id = settings.get("album_id")  # ID of the album to fetch images from
@@ -37,9 +37,5 @@ class Immich(BasePlugin):
             raise RuntimeError("Failed to download image.")
 
         img = Image.open(BytesIO(image_response.content))
-
-        # Resize image to fit the display
-        #width, height = device_config.get_resolution()
-        #img = img.convert("L").resize((width, height))
 
         return img
